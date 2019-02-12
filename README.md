@@ -1,2 +1,4 @@
 # Watershed-Model
-A model of the "watershed" effect, a two-dimensional mapping of energy levels
+A model of the "watershed" effect, a two-dimensional mapping of energy levels.
+
+The "watershed" model is a two-dimensional cell based architecture that records levels, or elevations, that represent where some quantity, water, for example, would go spontaneously. On earth, watersheds come about with the lowest possible points that water can go, and so, river channels tend to form and coaless as they go downstream. This attempts to model that in a simple cell-based setting that could also be repurposed for something else, such as, on a low level, electrons moving in electric fields, or, on a high level, societies transferring between cities.

@@ -1,0 +1,12 @@
+{
+	"name": "watersheds",
+	"authors": [
+		"Kadin Tucker"
+	],
+	"dependencies": {
+		"d2d": "~>1.6.5"
+	},
+	"description": "A program attempting to model the \"watershed\" effect, or general diffusive activity over a surface",
+	"copyright": "Copyright © 2019, Kadin Tucker",
+	"license": "proprietary"
+}
