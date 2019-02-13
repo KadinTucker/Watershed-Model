@@ -8,15 +8,16 @@ import watershed;
  */
 class MainActivity : Activity {
 
-    ElevationMap elevMap; ///The array representing the elevation at each quantized tile location
+    ElevMapComponent map; ///The map component part of the activity
 
     /**
      * Constructs a new main activity
-     * Initializes the elevation map
+     * Initializes the contained components
      */
     this(Display container) {
         super(container);
-        elevMap = new ElevationMap(30, 40, 0.5);
+        this.map = new ElevMapComponent(container, new iRectangle(50, 50, 500, 400), 50, Color(0, 110, 30), Color(220, 220, 220));
+        this.components ~= this.map;
     }
 
 }
