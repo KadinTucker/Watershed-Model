@@ -29,10 +29,12 @@ class ElevationMap {
         for(int i = 0; i < rows; i++) {
             this._values ~= null;
             for(int j = 0; j < cols; j++) {
-                this._values[i] ~= 0;
+                this._values[i] ~= rows * i + j;
             }
         }
         this.maxSlope = maxSlope;
+        this.max = this.maximum();
+        this.min = this.minimum();
     }
 
     /**
@@ -64,6 +66,7 @@ class ElevationMap {
      * Levels the elevation map by ensuring that all values
      * are consistent with the sloping standards
      * Also updates the maximum and minimum
+     * TODO: Fix infinite looping
      */
     void level() {
         this.max = this.maximum();
@@ -75,7 +78,7 @@ class ElevationMap {
         while(!allLevel) {
             allLevel = true;
             for(int i = 0; i < this._values.length; i++) {
-                for(int j = 0; i < this._values[j].length; j++) {
+                for(int j = 0; j < this._values[i].length; j++) {
                     //Left
                     if(i > 0 && this._values[i][j] - this._values[i - 1][j] > this.maxSlope) {
                         double shift = (abs(this._values[i][j] - this._values[i - 1][j]) - this.maxSlope) / 2;
@@ -98,7 +101,7 @@ class ElevationMap {
                         allLevel = false;
                     }
                     //Down
-                    if(j < this._values[i].length && this._values[i][j] - this._values[i][j + 1] > this.maxSlope) {
+                    if(j < this._values[i].length - 1 && this._values[i][j] - this._values[i][j + 1] > this.maxSlope) {
                         double shift = (abs(this._values[i][j] - this._values[i][j + 1]) - this.maxSlope) / 2;
                         this._values[i][j] = this._values[i][j] - shift;
                         this._values[i][j + 1] = this._values[i][j + 1] + shift;

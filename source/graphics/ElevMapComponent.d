@@ -9,6 +9,7 @@ class ElevMapComponent : Component {
     int cellSize; ///The size (side length) of each elevation cell
     Color minColor; ///The color for the minimum elevation
     Color maxColor; ///The color for the maximum elevation
+    Texture drawTexture; ///The surface to draw for the component
 
     /**
      * Constructs a new map component
@@ -21,6 +22,7 @@ class ElevMapComponent : Component {
         this.cellSize = cellSize;
         this.minColor = minColor;
         this.maxColor = maxColor;
+        this.updateTexture();
     }
 
     /**
@@ -46,19 +48,27 @@ class ElevMapComponent : Component {
     }
 
     /**
+     * Updates the draw texture contained
+     */
+    private void updateTexture() {
+        Surface drawSurface = new Surface(this.elevMap.values.length * this.cellSize, 
+                this.elevMap.values[0].length * this.cellSize);
+        for(int i = 0; i < this.elevMap.values.length; i++) {
+            for(int j = 0 ; j < this.elevMap.values[i].length; j++) {
+                drawSurface.drawColor = this.getColorFromValue(this.elevMap.values[i][j]);
+                drawSurface.fill(new iRectangle(i * this.cellSize, j * this.cellSize,
+                        this.cellSize, this.cellSize));
+            }
+        }
+        this.drawTexture = new Texture(drawSurface, this.container.renderer);
+    }
+
+    /**
      * The draw method of the component
      * Draws the map according to the boundaries and cell size
      */
     override void draw() {
-        for(int i = 0; i < this.elevMap.values.length; i++) {
-            for(int j = 0 ; j < this.elevMap.values[i].length; j++) {
-                this.container.renderer.drawColor = this.getColorFromValue(this.elevMap.values[i][j]);
-                this.container.renderer.fill(new iRectangle(
-                    this._location.initialPoint.x + i * this.cellSize,
-                    this._location.initialPoint.y + j * this.cellSize,
-                    this.cellSize, this.cellSize));
-            }
-        }
+        this.container.renderer.copy(this.drawTexture, this._location.initialPoint.x, this._location.initialPoint.y);
     }
 
     /**
