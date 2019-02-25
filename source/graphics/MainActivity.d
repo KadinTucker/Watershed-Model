@@ -16,7 +16,7 @@ class MainActivity : Activity {
      */
     this(Display container) {
         super(container);
-        this.map = new ElevMapComponent(container, new iRectangle(50, 50, 500, 400), 50, Color(0, 110, 30), Color(220, 220, 220));
+        this.map = new ElevMapComponent(container, new iRectangle(50, 50, 500, 400), 50, Color(0, 110, 30), Color(160, 160, 160));
         this.components ~= this.map;
     }
 

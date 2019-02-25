@@ -51,11 +51,11 @@ class ElevMapComponent : Component {
      * Updates the draw texture contained
      */
     private void updateTexture() {
-        Surface drawSurface = new Surface(this.elevMap.values.length * this.cellSize, 
-                this.elevMap.values[0].length * this.cellSize);
-        for(int i = 0; i < this.elevMap.values.length; i++) {
-            for(int j = 0 ; j < this.elevMap.values[i].length; j++) {
-                drawSurface.drawColor = this.getColorFromValue(this.elevMap.values[i][j]);
+        Surface drawSurface = new Surface(this.elevMap.elevation.length * this.cellSize, 
+                this.elevMap.elevation[0].length * this.cellSize);
+        for(int i = 0; i < this.elevMap.elevation.length; i++) {
+            for(int j = 0 ; j < this.elevMap.elevation[i].length; j++) {
+                drawSurface.drawColor = this.getColorFromValue(this.elevMap.elevation[i][j]);
                 drawSurface.fill(new iRectangle(i * this.cellSize, j * this.cellSize,
                         this.cellSize, this.cellSize));
             }
@@ -76,7 +76,8 @@ class ElevMapComponent : Component {
      * To be done
      */
     void handleEvent(SDL_Event event) {
-
+        if(event.type == SDL_MOUSEBUTTONDOWN) {
+        }
     }
 
 }
